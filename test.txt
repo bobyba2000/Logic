@@ -1,0 +1,28 @@
+parent(mikeTindall, miaGraceTindall).
+male(princeCharles).
+married(princeWilliam, kateMiddleton).
+female(princeEdward).
+divorced(captainMarkPhillips, princessAnne).
+
+husband(X, zaraPhillips).
+wife(islaPhillips, princeGeorge).
+father(princeHarry, princessCharlotte).
+mother(queenElizabethII, miaGraceTindall).
+child(X, princePhillip).
+son(X, princessAnne).
+daughter(X, princeAndrew).
+
+grandparent(princePhillip, peterPhillips).
+grandmother(X, mikeTindall).
+grandfather(princeCharles, X).
+grandchild(princessBeatrice, princeCharles).
+grandson(princeGeorge, X).
+granddaughter(X, princessAnne).
+
+sibling(X, princeEdward).
+brother(princeGeorge, princessCharlotte).
+sister(X, peterPhillips).
+aunt(X, princessEugine).
+uncle(princeEdward, princeGeorge).
+niece(miaGraceTindall, X).
+nephew(X, princeEdward).
