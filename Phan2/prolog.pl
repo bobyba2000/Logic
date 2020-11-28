@@ -16,14 +16,18 @@ grandchild(GC, GP) :- grandparent(GP, GC).
 grandson(GS, GP) :- grandchild(GS, GP), male(GS).
 granddaughter(GD, GP) :- grandchild(GD, GP), female(GD).
 
-sibling(Person1, Person2) :- mother(X, Person1), mother(X, Person2), father(Y, Person1), father(Y, Person2), Person1\==Person2.
+sibling(Person1, Person2) :- mother(X, Person1), mother(X, Person2), father(Y, Person1), father(Y, Person2), not(Person1==Person2).
 brother(Person, Sibling) :- sibling(Person, Sibling), male(Person).
 sister(Person, Sibling) :- sibling(Person, Sibling), female(Person).
 
-aunt(Person, NieceNephew) :- parent(X, NieceNephew), (sister(Person, X); (wife(Person, Y), sibling(X, Y))).
-uncle(Person, NieceNephew) :- parent(X, NieceNephew), (brother(Person, X); (husband(Person, Y), sibling(X, Y))).
-niece(Person, AuntUncle) :- female(Person), (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
-nephew(Person, AuntUncle) :- male(Person), (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
+aunt(Person, NieceNephew) :- parent(X, NieceNephew), sister(Person, X).
+aunt(Person, NieceNephew) :- parent(X, NieceNephew), wife(Person, Y), sibling(X, Y).
+uncle(Person, NieceNephew) :- parent(X, NieceNephew), brother(Person, X).
+uncle(Person, NieceNephew) :- parent(X, NieceNephew), husband(Person, Y), sibling(X, Y).
+niece(Person, AuntUncle) :- female(Person), aunt(AuntUncle, Person).
+niece(Person, AuntUncle) :- female(Person), uncle(AuntUncle, Person).
+nephew(Person, AuntUncle) :- male(Person), aunt(AuntUncle, Person).
+nephew(Person, AuntUncle) :- male(Person), uncle(AuntUncle, Person).
 
 greatgrandparent(GGP, GGC) :- grandparent(GGP, X), parent(X, GGC).
 greatgrandfather(GGF, GGC) :- greatgrandparent(GGF, GGC), male(GGF).
@@ -31,10 +35,14 @@ greatgrandmother(GGM, GGC) :- greatgrandparent(GGF, GGC), female(GGF).
 greatgrandchild(GGC, GGP) :- greatgrandparent(GGP, GGC).
 greatgrandson(GGS, GGP) :- greatgrandchild(GGS, GGP), male(GGS).
 greatgranddaughter(GGD, GGP) :- greatgrandchild(GGD, GGP), female(GGD).
-greataunt(GA, GreatNieceNephew) :- grandparent(X, GreatNieceNephew), (sister(GA, X); (wife(GA, Y), sibling(X, Y))).
-greatuncle(GU, GreatNieceNephew) :- grandparent(X, GreatNieceNephew), (brother(GU, X); (husband(GU, Y), sibling(X, Y))).
-greatniece(GN, GAuntUncle) :- female(GN), (greataunt(GAuntUncle, GN); greatuncle(GAuntUncle, GN)).
-greatnephew(GN, GAuntUncle) :- male(GN), (greataunt(GAuntUncle, GN); greatuncle(GAuntUncle, GN)).
+greataunt(GA, GreatNieceNephew) :- grandparent(X, GreatNieceNephew), sister(GA, X).
+greataunt(GA, GreatNieceNephew) :- grandparent(X, GreatNieceNephew), wife(GA, Y), sibling(X, Y).
+greatuncle(GU, GreatNieceNephew) :- grandparent(X, GreatNieceNephew), brother(GU, X).
+greatuncle(GU, GreatNieceNephew) :- grandparent(X, GreatNieceNephew), husband(GU, Y), sibling(X, Y).
+greatniece(GN, GAuntUncle) :- female(GN), greataunt(GAuntUncle, GN).
+greatniece(GN, GAuntUncle) :- female(GN), greatuncle(GAuntUncle, GN).
+greatnephew(GN, GAuntUncle) :- male(GN), greataunt(GAuntUncle, GN).
+greatnephew(GN, GAuntUncle) :- male(GN), greatuncle(GAuntUncle, GN).
 
 stepparent(StepParent, StepChild) :- married(StepParent, X), parent(X, StepChild).
 stepmother(StepMother, StepChild) :- stepparent(StepMother, StepChild), female(StepMother).
