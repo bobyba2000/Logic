@@ -19,7 +19,8 @@ class Rule:
 
 
     @staticmethod
-   def parse(str_rule):       
+   def parse(str_rule):  
+    # Example: daughter(Person, Parent) :- female(Person), parent(Parent, Person).     
       str_rule = str_rule.strip().rstrip('.').replace(' ', '')
       idx = str_rule.find(':-')
 
