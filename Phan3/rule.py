@@ -4,7 +4,7 @@ class Rule:
    def __init__(self, conclusion=Fact(), premises=[]):
       self.conclusion = conclusion        # Inferred fact
       self.premises = premises            # Conditions: list of facts
-      self.ops = ops.get_ops()            # List of related relations and functions
+      self.ops = self.get_ops()           # List of related relations and functions
 
 
     def count_premises(self):
