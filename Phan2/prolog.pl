@@ -55,7 +55,7 @@ halfsibling(Person1, Person2) :- child(Person1, X), stepparent(X, Person2).
 halfbrother(Person, Sibling) :- halfsibling(Person, Sibling), male(Person).
 halfsister(Person, Sibling) :- halfsibling(Person, Sibling), female(Person).
 
-cousin(person, NieceNephew) :- parent(X, Person), parent(Y, NieceNephew), sibling(X, Y).
+cousin(Person, NieceNephew) :- parent(X, Person), parent(Y, NieceNephew), sibling(X, Y).
 
 siblinginlaw(Person, Sibling) :- sibling(X, Sibling), married(Person, X).
 sisterinlaw(Person, Sibling) :- siblinginlaw(Person, Sibling), female(Person).
