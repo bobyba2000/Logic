@@ -21,7 +21,7 @@ class Fact:
       return Fact(self.op, self.args, 1 - self.negative)
 
    def copy(self):
-      return Fact(self.get_op(), self.get_args(), self.negate)
+      return Fact(self.get_op(), self.get_args(), self.negative)
 
    def get_args(self):
       return [arg.copy() if not isinstance(arg, str) else arg for arg in self.args]

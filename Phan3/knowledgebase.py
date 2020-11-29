@@ -16,7 +16,7 @@ class KnowledgeBase:
     return [fact.copy() for fact in self.facts]
   
   def getRule(self):
-    return [rule.copy for rule in self.rules]
+    return [rule.copy() for rule in self.rules]
 
   def __repr__(self):
     facts_str = "\n".join([fact.__repr__() for fact in self.facts])
