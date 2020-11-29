@@ -21,7 +21,7 @@ class Fact:
       return self.op
 
    @staticmethod
-   def Parse(str_fact):
+   def parse(str_fact):
       # Example: female(princess_diana).
       str_fact = str_fact.strip().rstrip('.').replace(' ', '')
       idx = str_fact.index('(')

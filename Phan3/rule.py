@@ -7,18 +7,18 @@ class Rule:
       self.ops = self.get_ops()           # List of related relations and functions
 
 
-    def count_premises(self):
+   def count_premises(self):
       return len(self.premises)
 
 
-    def get_ops(self):
+   def get_ops(self):
       ops = set()
       for premise in self.premises:
          ops.add(premise.op)
       return ops
 
 
-    @staticmethod
+   @staticmethod
    def parse(str_rule):  
     # Example: daughter(Person, Parent) :- female(Person), parent(Parent, Person).     
       str_rule = str_rule.strip().rstrip('.').replace(' ', '')
