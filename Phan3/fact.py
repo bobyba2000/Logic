@@ -35,7 +35,7 @@ class Fact:
    
    def haveVariablesInArgs(self):
       for arg in self.args:
-        if (is_variable(arg)):
+        if (isinstance(arg, str) and arg[0].isupper()):
           return True
       return False
 
