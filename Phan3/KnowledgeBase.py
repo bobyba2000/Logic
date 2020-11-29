@@ -2,11 +2,7 @@ from fact import Fact
 from rule import Rule
 
 class KnowledgeBase:
-  def __init__(self):
-    self.facts = []
-    self.rules = []
-
-  def __init__(self, facts, rules):
+  def __init__(self, facts = [], rules = []):
     self.facts = facts
     self.rules = rules
 
