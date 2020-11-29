@@ -11,6 +11,9 @@ class Fact:
          return False
       return self.args == other.args
 
+   def __eq__(self, other):
+      return self.equal(other)
+
    def negate(self):
       self.negative = 1 - self.negative
 
@@ -19,6 +22,11 @@ class Fact:
 
    def get_op(self):
       return self.op
+
+   def __repr__(self):
+      if len(self.args) > 0: 
+         return self.op + "(" + ", ".join(self.args) + ")"
+      else: return self.op
 
    @staticmethod
    def parse(str_fact):

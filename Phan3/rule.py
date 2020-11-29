@@ -17,6 +17,8 @@ class Rule:
          ops.add(premise.op)
       return ops
 
+   def __repr__(self):
+      return self.conclusion + " :- " + ", ".join(self.premises)
 
    @staticmethod
    def parse(str_rule):  
