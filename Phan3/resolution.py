@@ -45,6 +45,8 @@ def resolve(rgoal, clause):
 
 
 def resolution(kb, goal):
+    if goal.isNegative:
+        return not resolution(kb, goal.get_negated())
     kbCNF = [CNF.parse(fact) for fact in kb.getFacts()]
     kbCNF += [CNF.parse(rule) for rule in kb.getRules()]
     if not isinstance(goal, Fact):
@@ -56,6 +58,7 @@ def resolution(kb, goal):
         for term in kbCNF:
             if is_suitable(term, rgoal):
                 rgoal = resolve(term, rgoal)
+                kbCNF.append(rgoal)
                 suitableFound = True
         if len(rgoal.get_terms()) == 0:
             return True
