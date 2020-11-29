@@ -13,13 +13,7 @@ class KnowledgeBase:
     self.rules.append(rule)
 
   def getFact(self):
-    temp = []
-    for fact in self.facts:
-      temp.append(fact.copy())
-    return temp
+    return [fact.copy() for fact in self.facts]
   
   def getRule(self):
-    temp = []
-    for rule in self.rules:
-      temp.append(rule.copy())
-    return temp
+    return [rule.copy for rule in self.rules]
