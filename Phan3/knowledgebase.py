@@ -17,3 +17,10 @@ class KnowledgeBase:
   
   def getRule(self):
     return [rule.copy for rule in self.rules]
+
+  def __repr__(self):
+    facts_str = "\n".join([fact.__repr__() for fact in self.facts])
+    rules_str = "\n".join([rule.__repr__() for rule in self.rules])
+    if facts_str and rules_str: join_str = "\n"
+    else: join_str = ""
+    return join_str.join([facts_str, rules_str])
