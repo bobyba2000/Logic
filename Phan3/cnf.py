@@ -8,6 +8,12 @@ class CNF:
     def __repr__(self):
         return "; ".join([term.__repr__() for term in self.terms])
 
+    def append(self, fact):
+        self.terms.append(fact)
+
+    def get_terms(self):
+        return [term.copy() for term in self.terms]
+
     @staticmethod
     def parse(arg):
         if (isinstance(arg, Rule)):

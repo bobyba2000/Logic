@@ -11,10 +11,13 @@ class Rule:
       return len(self.premises)
 
    def get_premises(self):
-      return self.premises
+      return [premise.copy() for premise in self.premises]
 
    def get_conclusion(self):
-      return self.conclusion
+      return self.conclusion.copy()
+
+   def copy(self):
+      return Rule(self.get_conclusion(), self.get_premises)
 
    def get_ops(self):
       ops = set()

@@ -20,6 +20,9 @@ class Fact:
    def get_negated(self):
       return Fact(self.op, self.args, 1 - self.negative)
 
+   def copy(self):
+      return Fact(self.op, self.args, self.negate)
+
    def get_args(self):
       return self.args
 
