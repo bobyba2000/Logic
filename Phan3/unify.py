@@ -10,9 +10,9 @@ def unify(x, y, theta):
     return unifyVar(x, y, theta)
   elif (Fact.is_variable(y)):
     return unifyVar(y, x, theta)
-  elif (Fact.is_fact_in_fact(x) and Fact.is_fact_in_fact(y)):
+  elif (Fact.is_fact(x) and Fact.is_fact(y)):
     return unify(x.get_args(), y.get_args(), unify(x.get_op(), y.get_op(), theta))
-  elif (Fact.is_list_of_fact(x) and Fact.is_list_of_fact(y)):
+  elif (Fact.is_list(x) and Fact.is_list(y)):
     return unify(x[1:], y[1:], unify(x[0], y[0], theta))
   return False
 
