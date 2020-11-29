@@ -22,6 +22,7 @@ class Substitution:
   def add(self, var, val):
     self.vars.append(var)
     self.vals.append(val)
+    
   def SUBST(self, fact):
     args = fact.get_args()
     for i in range(len(args)):
