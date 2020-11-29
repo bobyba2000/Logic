@@ -21,10 +21,10 @@ class Fact:
       return Fact(self.op, self.args, 1 - self.negative)
 
    def copy(self):
-      return Fact(self.op, self.args, self.negate)
+      return Fact(self.get_op(), self.get_args(), self.negate)
 
    def get_args(self):
-      return self.args
+      return [arg.copy() if not isinstance(arg, str) else arg for arg in self.args]
 
    def get_op(self):
       return self.op
