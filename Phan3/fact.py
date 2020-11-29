@@ -53,9 +53,9 @@ class Fact:
       return isinstance(x, str) and x[0].isupper()
 
    @staticmethod
-   def is_fact_in_fact(x):
+   def is_fact(x):
       return isinstance(x, Fact)
 
    @staticmethod
-   def is_list_of_fact(x):
+   def is_list(x):
       return isinstance(x, list)
