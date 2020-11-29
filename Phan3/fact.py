@@ -16,6 +16,7 @@ class Fact:
 
    def negate(self):
       self.negative = 1 - self.negative
+      return self
 
    def get_args(self):
       return self.args
@@ -24,9 +25,13 @@ class Fact:
       return self.op
 
    def __repr__(self):
+      string = ""
       if len(self.args) > 0: 
-         return self.op + "(" + ", ".join(self.args) + ")"
-      else: return self.op
+         string = self.op + "(" + ", ".join(self.args) + ")"
+      else: string = self.op
+      if self.negative:
+         string = "not({})".format(string)
+      return string
 
    @staticmethod
    def parse(str_fact):

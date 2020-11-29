@@ -10,6 +10,11 @@ class Rule:
    def count_premises(self):
       return len(self.premises)
 
+   def get_premises(self):
+      return self.premises.copy()
+
+   def get_conclusion(self):
+      return self.conclusion
 
    def get_ops(self):
       ops = set()
@@ -17,8 +22,11 @@ class Rule:
          ops.add(premise.op)
       return ops
 
+   def get_premises_str(self):
+      return [premise.__repr__() for premise in self.premises]
+
    def __repr__(self):
-      return self.conclusion + " :- " + ", ".join(self.premises)
+      return self.conclusion.__repr__() + " :- " + ", ".join(self.get_premises_str())
 
    @staticmethod
    def parse(str_rule):  
