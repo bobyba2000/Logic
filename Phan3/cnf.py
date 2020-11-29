@@ -9,6 +9,9 @@ class CNF:
     def __repr__(self):
         return "; ".join([term.__repr__() for term in self.terms])
 
+    def copy(self):
+        return CNF([term.copy() for term in self.terms])
+
     def get_ops(self):
         ops = []
         for term in self.terms:
@@ -26,6 +29,12 @@ class CNF:
             if term.get_op() == op:
                 return term.copy()
         return False
+
+    def remove(self, del_term):
+        for term in self.terms:
+            if (term == del_term):
+                self.terms.remove(term)
+                return
 
     @staticmethod
     def parse(arg):

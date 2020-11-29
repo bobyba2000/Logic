@@ -1,3 +1,5 @@
+import re
+
 class Fact:
    def __init__(self, op='', args=[], isNegative=False):
       self.op = op               # Relation or function
@@ -42,13 +44,17 @@ class Fact:
 
    @staticmethod
    def parse(str_fact):
-      # Example: female(princess_diana).
       str_fact = str_fact.strip().rstrip('.').replace(' ', '')
+      isNegative = False
+      while (len(re.findall(r"^not\(.+\)$", str_fact)) > 0):
+         str_fact = str_fact[4:-1]
+         isNegative = 1 - isNegative
+      if (str_fact.find("(") == -1):
+         return Fact(str_fact, isNegative=isNegative)
       idx = str_fact.index('(')
-
       op = str_fact[:idx]
       args = str_fact[idx + 1 : -1].split(',')
-      return Fact(op, args)
+      return Fact(op, args, isNegative)
 
    @staticmethod
    def is_variable(x):

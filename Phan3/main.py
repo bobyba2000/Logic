@@ -5,6 +5,7 @@ import re
 from fact import Fact
 from rule import Rule
 from knowledgebase import KnowledgeBase
+from resolution import resolution
 
 class Inferring(Enum):
     FORWARD = 0
@@ -45,7 +46,7 @@ def process(file, isInput = False):
                 elif cmd == 'halt': sys.exit(0)
                 else: 
                     if isInput:
-                        query()
+                        print(resolution(knowledgeBase, Fact.parse(cmd)))
                     else:
                         if (cmd.find(":-") == -1):
                             knowledgeBase.appendFact(Fact.parse(s))
@@ -57,7 +58,6 @@ def process(file, isInput = False):
 def main():
     global infertype
     args = vars(parser.parse_args(sys.argv[1:]))
-    print(args)
     infertype = args['infertype']
     if args['files']:
         for file in args['files']:
