@@ -17,7 +17,7 @@ class Rule:
       return self.conclusion.copy()
 
    def copy(self):
-      return Rule(self.get_conclusion(), self.get_premises)
+      return Rule(self.get_conclusion(), self.get_premises())
 
    def get_ops(self):
       ops = set()

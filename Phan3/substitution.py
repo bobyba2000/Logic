@@ -22,3 +22,22 @@ class Substitution:
   def add(self, var, val):
     self.vars.append(var)
     self.vals.append(val)
+
+  def SUBST(self, fact):
+    args = fact.get_args()
+    for i in range(len(args)):
+      if (self.containVar(args[i])):
+        fact.args[i] = self.getValBaseOnVar(args[i])
+  
+  def compose(self, other):
+    temp = Substitution()
+    for i in range(len(self.vars)):
+      temp.vars.append(self.vars[i])
+      temp.vals.append(self.vals[i])
+    
+    for i in range(len(other.vars)):
+      if (not(temp.containVar(other.vars[i]))):
+        temp.vars.append(other.vars[i])
+        temp.vals.append(other.vals[i])
+    
+    return temp
