@@ -46,7 +46,12 @@ def process(file, isInput = False):
                 elif cmd == 'halt': sys.exit(0)
                 else: 
                     if isInput:
-                        print(resolution(knowledgeBase, Fact.parse(cmd)))
+                        if (infertype == Inferring.FORWARD.value):
+                            continue
+                        elif (infertype == Inferring.BACKWARD.value):
+                            continue
+                        elif (infertype == Inferring.RESOLUTION.value):
+                            print(resolution(knowledgeBase, Fact.parse(cmd)))
                     else:
                         if (cmd.find(":-") == -1):
                             knowledgeBase.appendFact(Fact.parse(s))

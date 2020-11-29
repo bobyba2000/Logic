@@ -45,8 +45,8 @@ def resolve(rgoal, clause):
 
 
 def resolution(kb, goal):
-    kbCNF = [CNF.parse(fact) for fact in kb.getFact()]
-    kbCNF += [CNF.parse(rule) for rule in kb.getRule()]
+    kbCNF = [CNF.parse(fact) for fact in kb.getFacts()]
+    kbCNF += [CNF.parse(rule) for rule in kb.getRules()]
     if not isinstance(goal, Fact):
         return
     rgoal = CNF.parse(goal.get_negated())
