@@ -110,7 +110,11 @@ granddaughter(GD, GP) :- grandchild(GD, GP), female(GD).
 sibling(Person1, Person2) :- mother(X, Person1), mother(X, Person2), father(Y, Person1), father(Y, Person2), Person1\==Person2.
 brother(Person, Sibling) :- sibling(Person, Sibling), male(Person).
 sister(Person, Sibling) :- sibling(Person, Sibling), female(Person).
-aunt(Person, NieceNephew) :- parent(X, NieceNephew), (sister(Person, X); (wife(Person, Y), sibling(X, Y))).
-uncle(Person, NieceNephew) :- parent(X, NieceNephew), (brother(Person, X); (husband(Person, Y), sibling(X, Y))).
-niece(Person, AuntUncle) :- female(Person), (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
-nephew(Person, AuntUncle) :- male(Person), (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
+aunt(Person, NieceNephew) :- parent(X, NieceNephew), sister(Person, X).
+aunt(Person, NieceNephew) :- parent(X, NieceNephew), wife(Person, Y), sibling(X, Y).
+uncle(Person, NieceNephew) :- parent(X, NieceNephew), brother(Person, X). 
+uncle(Person, NieceNephew) :- parent(X, NieceNephew), husband(Person, Y), sibling(X, Y).
+niece(Person, AuntUncle) :- female(Person), aunt(AuntUncle, Person).
+niece(Person, AuntUncle) :- female(Person), uncle(AuntUncle, Person).
+nephew(Person, AuntUncle) :- male(Person), aunt(AuntUncle, Person).
+nephew(Person, AuntUncle) :- male(Person), uncle(AuntUncle, Person).

@@ -34,7 +34,7 @@ def process(file, isInput = False):
         if s == "": continue
         if s[-1] == '.': s=s[:-1]
         # if punc == '.': print(s)
-        if s == 'quit': sys.exit(0)
+        if s == 'halt': sys.exit(0)
         else: 
             if isInput:
                 query()
