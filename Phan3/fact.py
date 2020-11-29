@@ -30,6 +30,12 @@ class Fact:
 
    def get_op(self):
       return self.op
+   
+   def haveVariablesInArgs(self):
+      for arg in self.args:
+        if (is_variable(arg)):
+          return True
+      return False
 
    def __repr__(self):
       string = ""
