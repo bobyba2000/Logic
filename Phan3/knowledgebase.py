@@ -12,10 +12,10 @@ class KnowledgeBase:
   def appendRule(self, rule):
     self.rules.append(rule)
 
-  def getFact(self):
+  def getFacts(self):
     return [fact.copy() for fact in self.facts]
   
-  def getRule(self):
+  def getRules(self):
     return [rule.copy() for rule in self.rules]
 
   def __repr__(self):
@@ -24,3 +24,19 @@ class KnowledgeBase:
     if facts_str and rules_str: join_str = "\n"
     else: join_str = ""
     return join_str.join([facts_str, rules_str])
+  
+  def getRulePremisesFromConclusionOp(self, op):
+    for rule in self.rules:
+      if (rule.get_conclusion().get_op() == op):
+        return rule.get_premises()
+    
+  def getRuleConclusionFromConclusionOp(self, op):
+    for rule in self.rules:
+      if (rule.get_conclusion().get_op() == op):
+        return rule.get_conclusion()
+
+  def checkFact(self, fact):
+    for f in self.facts:
+      if (fact == f):
+        return True
+    return False
