@@ -11,7 +11,7 @@ class Rule:
       return len(self.premises)
 
    def get_premises(self):
-      return self.premises.copy()
+      return self.premises
 
    def get_conclusion(self):
       return self.conclusion

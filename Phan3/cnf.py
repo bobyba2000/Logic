@@ -13,7 +13,7 @@ class CNF:
         if (isinstance(arg, Rule)):
             terms = []
             for premise in arg.get_premises():
-                terms.append(premise.negate())
+                terms.append(premise.get_negated())
             terms.append(arg.get_conclusion())
             return CNF(terms=terms)
         if (isinstance(arg, Fact)):

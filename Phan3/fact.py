@@ -16,7 +16,9 @@ class Fact:
 
    def negate(self):
       self.negative = 1 - self.negative
-      return self
+   
+   def get_negated(self):
+      return Fact(self.op, self.args, 1 - self.negative)
 
    def get_args(self):
       return self.args
