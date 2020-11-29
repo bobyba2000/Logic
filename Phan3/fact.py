@@ -5,6 +5,8 @@ class Fact:
       self.isNegative = isNegative   # Not
 
    def equal(self, other):
+      if not isinstance(other, Fact):
+         return False
       if self.op != other.op:
          return False
       if self.isNegative != other.isNegative:
