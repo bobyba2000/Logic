@@ -36,7 +36,7 @@ class Substitution:
       temp.vals.append(self.vals[i])
     
     for i in range(len(other.vars)):
-      if (!temp.containVar(other.vars[i])):
+      if (not(temp.containVar(other.vars[i]))):
         temp.vars.append(other.vars[i])
         temp.vals.append(other.vals[i])
     
