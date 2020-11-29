@@ -22,11 +22,15 @@ class Rule:
          ops.add(premise.op)
       return ops
 
+<<<<<<< HEAD
    def get_premises_str(self):
       return [premise.__repr__() for premise in self.premises]
 
    def __repr__(self):
       return self.conclusion.__repr__() + " :- " + ", ".join(self.get_premises_str())
+=======
+>>>>>>> 
+
 
    @staticmethod
    def parse(str_rule):  

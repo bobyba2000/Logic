@@ -24,6 +24,7 @@ class Fact:
    def get_op(self):
       return self.op
 
+<<<<<<< HEAD
    def __repr__(self):
       string = ""
       if len(self.args) > 0: 
@@ -33,6 +34,8 @@ class Fact:
          string = "not({})".format(string)
       return string
 
+=======
+>>>>>>> d7127ea693bdb20059b957ca2b26d9e2921ae0d4
    @staticmethod
    def parse(str_fact):
       # Example: female(princess_diana).
@@ -42,3 +45,15 @@ class Fact:
       op = str_fact[:idx]
       args = str_fact[idx + 1 : -1].split(',')
       return Fact(op, args)
+
+   @staticmethod
+   def is_variable(x):
+      return isinstance(x, str) and x[0].isupper()
+
+   @staticmethod
+   def is_fact_in_fact(x):
+      return isinstance(x, Fact)
+
+   @staticmethod
+   def is_list_of_fact(x):
+      return isinstance(x, list)
