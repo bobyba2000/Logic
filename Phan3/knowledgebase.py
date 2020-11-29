@@ -27,12 +27,12 @@ class KnowledgeBase:
   
   def getRulePremisesFromConclusionOp(self, op):
     for rule in self.rules:
-      if (rule.get_conclusion().get_op() == op)
+      if (rule.get_conclusion().get_op() == op):
         return rule.get_premises()
     
   def getRuleConclusionFromConclusionOp(self, op):
     for rule in self.rules:
-      if (rule.get_conclusion().get_op() == op)
+      if (rule.get_conclusion().get_op() == op):
         return rule.get_conclusion()
 
   def checkFact(self, fact):
