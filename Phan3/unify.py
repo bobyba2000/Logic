@@ -1,4 +1,5 @@
 from fact import Fact
+from substitution import Substitution
 
 def unify(x, y, theta):
   if theta is False:
@@ -20,7 +21,7 @@ def unifyVar(var, x, theta):
   if (theta.containVar(var)):
     return unify(theta.getValBaseOnVal(var), x, theta)
   elif (theta.containVar(x)):
-    return unify(var, getValBaseOnVal(x), theta)
+    return unify(var, theta.getValBaseOnVal(x), theta)
   
   theta.add(var, x)
   return theta
