@@ -13,18 +13,14 @@ class Inferring(Enum):
     RESOLUTION = 2
 
 knowledgeBase = KnowledgeBase()
-infertype = Inferring.BACKWARD.value
+infertype = -1
 
 parser = argparse.ArgumentParser(description="Simple Prolog Implementation.")
 parser.add_argument("files", nargs='*', metavar='file', type=str)
-parser.add_argument("--infertype", nargs=1, default=Inferring.BACKWARD, type=int, metavar='i', help="{}: forward; {}: backward; {}: resolution".format(Inferring.FORWARD.value, Inferring.BACKWARD.value, Inferring.RESOLUTION.value))
-
-def query():
-    global infertype
-    pass
+parser.add_argument("--infertype", nargs=1, default=Inferring.BACKWARD.value, type=int, metavar='i', help="{}: forward; {}: backward; {}: resolution".format(Inferring.FORWARD.value, Inferring.BACKWARD.value, Inferring.RESOLUTION.value))
 
 def process(file, isInput = False):
-    global knowledgeBase
+    global knowledgeBase, infertype
     cmds = []
     while True:
         if isInput:
@@ -63,7 +59,7 @@ def process(file, isInput = False):
 def main():
     global infertype
     args = vars(parser.parse_args(sys.argv[1:]))
-    infertype = args['infertype']
+    infertype = args['infertype'][0]
     if args['files']:
         for file in args['files']:
             process(open(file))
