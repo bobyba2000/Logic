@@ -10,15 +10,17 @@ def is_suitable(rgoal, clause):
         return is_suitable(clause, rgoal)
     for goal_term in rgoal.get_terms():
         op = goal_term.get_op()
-        suitable_term = clause.find_term_by_op(op)
-        if suitable_term == False:
+        suitable_terms = clause.find_term_by_op(op)
+        if suitable_terms == False:
             continue
-        elif goal_term.isNegative == suitable_term.isNegative:
-            continue
-        else:
-            theta = Substitution()
-            if unify(goal_term, suitable_term, theta) is not False:
-                return True
+        else: 
+            for suitable_term in suitable_terms:
+                if goal_term.isNegative == suitable_term.isNegative:
+                    continue
+                else:
+                    theta = Substitution()
+                    if unify(goal_term, suitable_term, theta) is not False:
+                        return True
     return False
             
 def resolve(rgoal, clause):
@@ -31,13 +33,18 @@ def resolve(rgoal, clause):
     theta = Substitution()
     for goal_term in rgoal.get_terms():
         op = goal_term.get_op()
-        suitable_term = clause.find_term_by_op(op)
-        if suitable_term == False:
+        suitable_terms = clause.find_term_by_op(op)
+        if suitable_terms == False:
             continue
-        theta = Substitution()
-        unify(goal_term, suitable_term, theta)
-        clause.remove(suitable_term)
-        rgoal.remove(goal_term)
+        for suitable_term in suitable_terms:
+            if goal_term.isNegative == suitable_term.isNegative:
+                continue
+            theta = Substitution()
+            unify(goal_term, suitable_term, theta)
+            if theta is not False:
+                clause.remove(suitable_term)
+                rgoal.remove(goal_term)
+                break
     result = CNF(rgoal.get_terms() + clause.get_terms())
     for term in result.terms:
         theta.SUBST(term)
@@ -64,3 +71,24 @@ def resolution(kb, goal):
             return True
         if not suitableFound: return False
         
+def resolution_search(kb, goal): 
+    temp = []
+    consts = kb.getAllConsts()
+    args = goal.get_args()
+    hasVariable = False
+    for i in range(len(args)):
+      if (Fact.is_variable(args[i])):
+        hasVariable = True
+        for const in consts:
+            theta = Substitution()
+            newGoal = goal.copy()
+            newGoal.args[i] = const 
+            if resolution(kb, newGoal) is True:
+                theta.vars.append(args[i])
+                theta.vals.append(const)
+                temp.append(theta)
+    if not hasVariable:
+        return resolution(kb, goal)
+    elif len(temp) == 0:
+        return False
+    return temp

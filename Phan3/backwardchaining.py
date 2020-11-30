@@ -38,7 +38,7 @@ class BackwardChaining:
       if (Fact.is_variable(args[i])):
         for const in consts:
           theta = Substitution()
-          newQuery = self.query.copy();
+          newQuery = self.query.copy()
           newQuery.args[i] = const
           bc = BackwardChaining(self.KB, newQuery, False)
           ans = bc.answer()
