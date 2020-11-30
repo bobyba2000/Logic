@@ -2,7 +2,7 @@ from substitution import Substitution
 from rule import Rule
 from fact import Fact
 from unify import unify
-from KnowledgeBase import KnowledgeBase
+from knowledgebase import KnowledgeBase
 import itertools
 
 def fol_fc_ask(kb, alpha):

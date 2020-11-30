@@ -37,7 +37,7 @@ class KnowledgeBase:
 
   def checkFact(self, fact):
     for f in self.facts:
-      if (fact == f):
+      if (fact == f and f.isNegative == False):
         return True
     return False
 

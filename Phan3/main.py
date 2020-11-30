@@ -7,6 +7,7 @@ from rule import Rule
 from knowledgebase import KnowledgeBase
 from resolution import resolution_search
 from backwardchaining import BackwardChaining
+from fol_fc_ask import fol_fc_ask
 
 class Inferring(Enum):
     FORWARD = 0
@@ -44,7 +45,7 @@ def process(file, isInput = False):
                 else: 
                     if isInput:
                         if (infertype == Inferring.FORWARD.value):
-                            continue
+                            print(fol_fc_ask(knowledgeBase, Fact.parse(cmd)))
                         elif (infertype == Inferring.BACKWARD.value):
                             bc = BackwardChaining(knowledgeBase, Fact.parse(cmd))
                             print(bc.answer())
