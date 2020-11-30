@@ -6,6 +6,7 @@ from fact import Fact
 from rule import Rule
 from knowledgebase import KnowledgeBase
 from resolution import resolution
+from backwardchaining import BackwardChaining
 
 class Inferring(Enum):
     FORWARD = 0
@@ -45,7 +46,8 @@ def process(file, isInput = False):
                         if (infertype == Inferring.FORWARD.value):
                             continue
                         elif (infertype == Inferring.BACKWARD.value):
-                            continue
+                            bc = BackwardChaining(knowledgeBase, Fact.parse(cmd))
+                            print(bc.answer())
                         elif (infertype == Inferring.RESOLUTION.value):
                             print(resolution(knowledgeBase, Fact.parse(cmd)))
                     else:
