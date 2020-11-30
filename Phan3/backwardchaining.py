@@ -16,7 +16,7 @@ class BackwardChaining:
     premises = self.KB.getRulePremisesFromConclusionOp(self.query.get_op())
     conclusion = self.KB.getRuleConclusionFromConclusionOp(self.query.get_op())
     if (conclusion == None):
-      return self.KB.checkFact(query)
+      return self.KB.checkFact(self.query)
     theta = unify(conclusion, self.query, Substitution())
     if (theta == False):
       return False
