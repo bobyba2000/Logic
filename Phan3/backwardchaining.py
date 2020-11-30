@@ -18,14 +18,16 @@ class BackwardChaining:
     if (conclusion == None):
       return self.KB.checkFact(query)
     theta = unify(conclusion, self.query, Substitution())
-      
     if (theta == False):
       return False
     for premise in premises:
       theta.SUBST(premise)
-      newQuery = BackwardChaining(self.KB, premise, False)
-      if (newQuery.answerTrueFalse is False):
-        return False
+      if (self.KB.checkFact(premise) is True):
+        continue
+      else:
+        newQuery = BackwardChaining(self.KB, premise, False)
+        if (newQuery.answerTrueFalse() is False):
+          return False
     return True
   
   def answerList(self):
@@ -36,7 +38,7 @@ class BackwardChaining:
       if (Fact.is_variable(args[i])):
         for const in consts:
           theta = Substitution()
-          newQuery = self.query.copy()
+          newQuery = self.query.copy();
           newQuery.args[i] = const
           bc = BackwardChaining(self.KB, newQuery, False)
           ans = bc.answer()
@@ -45,7 +47,13 @@ class BackwardChaining:
             theta.vals.append(const)
             temp.append(theta)
           elif (ans is not False):
-            temp.append(ans)
+            theta.vars.append(args[i])
+            theta.vals.append(const)
+            for t in ans:
+              t = theta.compose(t)
+              temp.append(t)
+        break
+
     if (temp == []):
       return False
     return temp
