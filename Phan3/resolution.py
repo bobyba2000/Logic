@@ -73,7 +73,6 @@ def resolution(kb, goal):
 
 def set_variable(var_loc, index, kb, newGoal, consts, theta):
     if index == len(var_loc):
-        print(newGoal)
         if resolution(kb, newGoal):
             for i in range(index):
                 theta[i].append(newGoal.get_args()[var_loc[i]])
@@ -81,7 +80,6 @@ def set_variable(var_loc, index, kb, newGoal, consts, theta):
         else: return False
     hasSuccess = False
     for const in consts:
-        print("Set {} = {}".format(var_loc[index], const))
         newGoal.args[var_loc[index]] = const
         if set_variable(var_loc, index + 1, kb, newGoal, consts, theta):
             hasSuccess = True
