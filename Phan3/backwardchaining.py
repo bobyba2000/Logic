@@ -6,9 +6,10 @@ from knowledgebase import KnowledgeBase
 from rule import Rule
 
 class BackwardChaining:
-  def __init__(self, KB, query):
+  def __init__(self, KB, query, root = True):
     self.KB = KB
     self.query = query
+    self.root = root
   
   def answerTrueFalse(self):
     res = []
@@ -22,7 +23,7 @@ class BackwardChaining:
       return False
     for premise in premises:
       theta.SUBST(premise)
-      newQuery = BackwardChaining(self.KB, premise)
+      newQuery = BackwardChaining(self.KB, premise, False)
       if (newQuery.answerTrueFalse is False):
         return False
     return True
@@ -37,7 +38,7 @@ class BackwardChaining:
           theta = Substitution()
           newQuery = query.copy();
           newQuery.args[i] = const
-          bc = BackwardChaining(self.KB, newQuery)
+          bc = BackwardChaining(self.KB, newQuery, False)
           ans = bc.answer()
           if (ans is True):
             theta.vars.append(args[i])
@@ -48,3 +49,21 @@ class BackwardChaining:
     if (temp == []):
       return False
     return temp
+ 
+  def answer(self):
+    if (self.query.haveVariablesInArgs()):
+      if (self.root is not True):
+        return self.answerList()
+      else:
+        temp = []
+        res = self.answerList()
+        for theta in res:
+          s = ""
+          for i in range(len(theta.vars)):
+            s += "{0}: {1}".format(theta.vars[i], theta.vals[i])
+            if (i!=len(theta.vars)-1):
+              s += ", "
+          temp.append(s)
+        return temp
+    else:
+      return self.answerTrueFalse()
