@@ -57,6 +57,8 @@ class BackwardChaining:
       else:
         temp = []
         res = self.answerList()
+        if (res is False):
+          return False
         for theta in res:
           s = ""
           for i in range(len(theta.vars)):
