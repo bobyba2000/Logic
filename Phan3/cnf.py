@@ -25,10 +25,13 @@ class CNF:
         return [term.copy() for term in self.terms]
 
     def find_term_by_op(self, op):
+        ret_list = []
         for term in self.terms:
             if term.get_op() == op:
-                return term.copy()
-        return False
+                ret_list.append(term)
+        if len(ret_list) == 0:
+            return False
+        return ret_list
 
     def remove(self, del_term):
         for term in self.terms:

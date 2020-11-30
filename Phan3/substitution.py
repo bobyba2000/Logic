@@ -3,6 +3,12 @@ class Substitution:
     self.vars = []
     self.vals = []
 
+  def __repr__(self):
+    string = str()
+    for i in range(len(self.vars)):
+      string += "{} = {}, ".format(self.vars[i], self.vals[i])
+    return string.rstrip(", ")
+
   def containVar(self, var):
     return var in self.vars
 
