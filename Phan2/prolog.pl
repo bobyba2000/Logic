@@ -1,4 +1,4 @@
-husband(Person, Wife) :- male(Person), female(Wife), married(Wife, Person).
+husband(Person, Wife) :- male(Person), female(Wife), married(Person, Wife).
 wife(Person, Husband) :- husband(Husband, Person).
 
 father(Parent, Child) :- male(Parent), parent(Parent, Child).

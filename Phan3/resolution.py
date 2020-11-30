@@ -70,25 +70,41 @@ def resolution(kb, goal):
         if len(rgoal.get_terms()) == 0:
             return True
         if not suitableFound: return False
-        
+
+def set_variable(var_loc, index, kb, newGoal, consts, theta):
+    if index == len(var_loc):
+        print(newGoal)
+        if resolution(kb, newGoal):
+            for i in range(index):
+                theta[i].append(newGoal.get_args()[var_loc[i]])
+            return True
+        else: return False
+    hasSuccess = False
+    for const in consts:
+        print("Set {} = {}".format(var_loc[index], const))
+        newGoal.args[var_loc[index]] = const
+        if set_variable(var_loc, index + 1, kb, newGoal, consts, theta):
+            hasSuccess = True
+    return hasSuccess
+
 def resolution_search(kb, goal): 
-    temp = []
     consts = kb.getAllConsts()
     args = goal.get_args()
-    hasVariable = False
+    var_loc = []
     for i in range(len(args)):
-      if (Fact.is_variable(args[i])):
-        hasVariable = True
-        for const in consts:
-            theta = Substitution()
-            newGoal = goal.copy()
-            newGoal.args[i] = const 
-            if resolution(kb, newGoal) is True:
-                theta.vars.append(args[i])
-                theta.vals.append(const)
-                temp.append(theta)
-    if not hasVariable:
+        if Fact.is_variable(args[i]):
+            var_loc.append(i)
+    if len(var_loc) == 0:
         return resolution(kb, goal)
-    elif len(temp) == 0:
-        return False
-    return temp
+    theta = [list() for i in range(len(var_loc))]
+    newGoal = goal.copy()
+    if set_variable(var_loc, 0, kb, newGoal, consts, theta) is not False:
+        string = str()
+        for i in range(len(theta[0])):
+            line = "{"
+            for j in range(len(var_loc)):
+                line += "{} = {}, ".format(goal.get_args()[var_loc[j]], theta[j][i])
+            string += line.rstrip(", ") + "}; "
+        return string.rstrip("; ")
+    return False
+
