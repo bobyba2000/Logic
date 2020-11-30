@@ -40,3 +40,12 @@ class KnowledgeBase:
       if (fact == f):
         return True
     return False
+
+  def getAllConsts(self):
+    temp = []
+    for fact in self.facts:
+      for arg in fact.get_args():
+        if (arg not in temp):
+          temp.append(arg)
+    return temp
+  
